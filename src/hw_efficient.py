@@ -61,8 +61,8 @@ def pauli_list_to_hamiltonian(pauli_list):
     ]
 
 # Circuit design variables
-n_bits = 4
-n_layers = 5
+n_bits = 16
+n_layers = 15
 J = 1
 JOB_NAME = "".join(("HW_efficient | ","N_bits:",str(n_bits)," Layers:",str(n_layers)))
 
@@ -110,7 +110,7 @@ def cmain() -> None:
         hamiltonian=HAMILTONIAN,
         maximize=False,
         initial_point=INITIAL_POINT,
-        optimizer=Optimizer.NELDER_MEAD, # Classical Optimizer
+        optimizer=Optimizer.COBYLA, # Classical Optimizer
         max_iteration=10000,
         tolerance=1e-10,
         step_size=0,
@@ -130,8 +130,10 @@ show(qprog)
 write_qmod(qmod_prefs, name="vqe_primitives")
 
 # Execution
+print("----------- STARTED OPTIMIZATION -----------")
 estimation = execute(qprog)
 vqe_result = estimation.result()[0].value
 
 print("Minimal energy of the Hamiltonian", vqe_result.energy)
+print("----------- FINISHED OPTIMIZATION -----------")
 # print("Optimal parameters for the Ansatz", vqe_result.optimal_parameters)
