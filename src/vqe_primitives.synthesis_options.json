@@ -11,28 +11,28 @@
     "backend_name": null,
     "custom_hardware_settings": {
       "basis_gates": [
-        "x",
+        "r",
+        "z",
+        "rx",
+        "cz",
         "u",
-        "sdg",
+        "s",
         "u1",
         "id",
-        "u2",
-        "s",
         "h",
+        "ry",
+        "sxdg",
         "cx",
         "tdg",
-        "t",
-        "p",
-        "cz",
-        "sxdg",
-        "r",
-        "cy",
-        "z",
-        "y",
-        "ry",
-        "rx",
+        "u2",
+        "x",
+        "rz",
         "sx",
-        "rz"
+        "p",
+        "t",
+        "y",
+        "sdg",
+        "cy"
       ],
       "connectivity_map": null,
       "is_symmetric_connectivity": true
@@ -47,6 +47,6 @@
     "solovay_kitaev_max_iterations": null,
     "timeout_seconds": 300,
     "optimization_timeout_seconds": null,
-    "random_seed": 3157430560
+    "random_seed": 78665036
   }
 }
