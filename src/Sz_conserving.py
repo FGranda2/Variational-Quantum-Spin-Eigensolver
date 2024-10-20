@@ -2,11 +2,7 @@
 from classiq import * # Using Classiq Version 0.52.0 Release
 import numpy as np
 from typing import cast, List
-import quimb as qu
-from functools import reduce
-from operator import mul
-from classiq.execution import ExecutionSession, ExecutionPreferences
-from scipy.optimize import minimize
+from classiq.execution import ExecutionPreferences
 
 # Initialization circuit layer
 @qfunc
@@ -69,7 +65,7 @@ def build_pauli_string(N: int, J: float) -> list[tuple[str, float]]:
             
             # Join Pauli string and add it to the list with coefficient J
             pauli_string = ''.join(identity)
-            pauli_list.append((pauli_string[::-1], J))
+            pauli_list.append((pauli_string, J))
     
     return pauli_list
 
@@ -90,83 +86,76 @@ def pauli_list_to_hamiltonian(pauli_list):
 
 # Circuit design variables
 n_bits = 4
-n_layers = 15
+n_layers = 5
 J = 1
+JOB_NAME = "".join(("Sz_conserving | ","N_bits:",str(n_bits)," Layers:",str(n_layers)))
 
 # Create the pauli list
 pauli_list = build_pauli_string(n_bits,J)
 # Create the Hamiltonian
 heis_ham = pauli_list_to_hamiltonian(pauli_list)
 
-param_per_layer = (n_bits - 1)+n_bits
+# Determine the # of parameters
+param_per_layer = (n_bits - 1)+n_bits # The N_Blocks + the Phase gates
 num_parameters = param_per_layer*n_layers
 
+# Defining the Hamiltonian from the problem
+HAMILTONIAN = QConstant("HAMILTONIAN", List[PauliTerm], heis_ham)
+
+# Defining the initial parameter values
+X0 = list((np.random.rand(num_parameters) - .5) * np.pi)
+INITIAL_POINT = QConstant("INITIAL_POINT", List[float],X0)
+
+# Defining the Ansatz for the Problem
 @qfunc
 def main(q: Output[QArray], p: CArray[CReal, num_parameters]) -> None:
-    # Create the array of bits of proper size
-    # q = QArray("q")
     allocate(n_bits, q)
-
     # Prepare the initial state
+    # [0101....01]
     # for i in range(n_bits):
     #     if i % 2 != 0:
-    #         X(q[i]) 
-    
-    # Do the initialization circuit
-    Init(q)
+    #         X(q[i])
 
+    # [1010....10]
+    for i in range(n_bits):
+        if i % 2 != 0:
+            X(q[i])
+
+    # Init(q)
     # Do n layers of the Sz_conserving Ansatz
     for i in range(n_layers):
         start_index = i * param_per_layer
         end_index = start_index + param_per_layer
         Sz_conserving_layer(q, p[start_index:end_index])
 
+# Defining the Variational Quantum Eigensolver p4rimitives with proper paramters
+@cfunc
+def cmain() -> None:
+    res = vqe(
+        hamiltonian=HAMILTONIAN,
+        maximize=False,
+        initial_point=INITIAL_POINT,
+        optimizer=Optimizer.NELDER_MEAD, # Classical Optimizer
+        max_iteration=10000,
+        tolerance=1e-10,
+        step_size=0,
+        skip_compute_variance=False,
+        alpha_cvar=1,
+    )
+    save({"result": res})
 
-# Simulation
-mod = create_model(main)
-# qprog = synthesize(mod)
-# show(qprog)
+# Model, preferences and synthesize
+qmod = create_model(main, classical_execution_function=cmain)
+qmod_prefs = set_execution_preferences(
+    qmod,
+    ExecutionPreferences(num_shots=10000, job_name=JOB_NAME),
+)
+qprog = synthesize(qmod_prefs)
+write_qmod(qmod_prefs, name="vqe_primitives")
 
-# Start Session
-# execution_session = ExecutionSession(qprog, execution_preferences=ExecutionPreferences(num_shots=100000, job_name="Job"))
-x0 = 2 * np.pi * np.random.random(num_parameters)
+# Execution
+estimation = execute(qprog)
+vqe_result = estimation.result()[0].value
 
-# Create dict for results
-cost_history_dict = {
-    "prev_vector": None,
-    "iters": 0,
-    "cost_history": [],
-}
-
-# Define the cost function and update dict
-def cost_function(params, session, hamiltonian):
-    
-    estimate_result = session.estimate(hamiltonian, {"p": list(params)})
-    # print("Current Result: ", estimate_result)
-    energy = estimate_result.value.real
-    # Update cost history
-    cost_history_dict["iters"] += 1
-    cost_history_dict["prev_vector"] = params
-    cost_history_dict["cost_history"].append(energy)
-    print(f"Iters. done: {cost_history_dict['iters']} [Current cost: {energy}]")
-    # print(params)
-    print("-----------------------------------------------")
-    return energy
-
-# Minimize and print results
-# res = minimize(
-#         cost_function,
-#         x0,
-#         args=(execution_session, heis_ham),
-#         method='Nelder-Mead',
-#         tol=1e-10,
-#         options={'disp': False}  # Set maximum iterations to 5000
-#     )
-
-qprog = synthesize(mod)
-# vqe(hamiltonian=heis_ham, maximize=False, initial_point=x0, optimizer=4, max_iteration=10, tolerance=1e-10)
-execution_session = ExecutionSession(qprog, execution_preferences=ExecutionPreferences(num_shots=100000, job_name="Job"))
-vqe()
-results = execution_session.vqe(hamiltonian=heis_ham, maximize=False, initial_point=x0, optimizer=4, max_iteration=10, tolerance=1e-10)
-
-print(results[0].value.energy)
+print("Minimal energy of the Hamiltonian", vqe_result.energy)
+# print("Optimal parameters for the Ansatz", vqe_result.optimal_parameters)

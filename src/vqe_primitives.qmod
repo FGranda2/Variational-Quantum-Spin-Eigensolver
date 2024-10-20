@@ -1,0 +1,144 @@
+HAMILTONIAN: PauliTerm[] = [
+  PauliTerm {
+    pauli=[
+      Pauli::X,
+      Pauli::X,
+      Pauli::I,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::Y,
+      Pauli::Y,
+      Pauli::I,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::Z,
+      Pauli::Z,
+      Pauli::I,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::X,
+      Pauli::X,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::Y,
+      Pauli::Y,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::Z,
+      Pauli::Z,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::I,
+      Pauli::X,
+      Pauli::X
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::I,
+      Pauli::Y,
+      Pauli::Y
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::I,
+      Pauli::Z,
+      Pauli::Z
+    ],
+    coefficient=1
+  }
+];
+
+INITIAL_POINT: real[] = [
+  1.3132,
+  1.2348,
+  1.1419,
+  0.1391,
+  0.1244,
+  0.4273,
+  (-0.796),
+  (-0.7228),
+  0.617,
+  (-1.3569),
+  0.2342,
+  0.3757,
+  (-0.2241),
+  1.4197,
+  0.4895
+];
+
+qfunc Init(q: qbit[]) {
+  X(q[0]);
+  X(q[1]);
+  X(q[2]);
+  X(q[3]);
+  hadamard_transform(q[0]);
+  CX(q[0], q[1]);
+  hadamard_transform(q[2]);
+  CX(q[2], q[3]);
+}
+
+qfunc N_block(q0: qbit, q1: qbit, layer: real) {
+  RZ(1.5708, q1);
+  CX(q1, q0);
+  RZ((2 * layer) - 1.5708, q0);
+  RY(1.5708 - (2 * layer), q1);
+  CX(q0, q1);
+  RY((2 * layer) - 1.5708, q1);
+  CX(q1, q0);
+  RZ(-1.5708, q0);
+}
+
+qfunc Stot_conserving_layer(q: qbit[], params: real[]) {
+  N_block(q[0], q[1], params[0]);
+  N_block(q[2], q[3], params[1]);
+  N_block(q[1], q[2], params[2]);
+}
+
+qfunc main(output q: qbit[], p: real[15]) {
+  allocate(4, q);
+  Init(q);
+  Stot_conserving_layer(q, p[0:3]);
+  Stot_conserving_layer(q, p[3:6]);
+  Stot_conserving_layer(q, p[6:9]);
+  Stot_conserving_layer(q, p[9:12]);
+  Stot_conserving_layer(q, p[12:15]);
+}
+
+cscope ```
+res = vqe(hamiltonian=HAMILTONIAN, maximize=False, initial_point=INITIAL_POINT, optimizer=Optimizer.NELDER_MEAD, max_iteration=10000, tolerance=1e-10, step_size=0, skip_compute_variance=False, alpha_cvar=1)
+save({'result': res})
+```

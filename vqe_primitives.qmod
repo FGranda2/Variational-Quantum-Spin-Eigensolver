@@ -1,0 +1,130 @@
+HAMILTONIAN: PauliTerm[] = [
+  PauliTerm {
+    pauli=[
+      Pauli::X,
+      Pauli::X,
+      Pauli::I,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::Y,
+      Pauli::Y,
+      Pauli::I,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::Z,
+      Pauli::Z,
+      Pauli::I,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::X,
+      Pauli::X,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::Y,
+      Pauli::Y,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::Z,
+      Pauli::Z,
+      Pauli::I
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::I,
+      Pauli::X,
+      Pauli::X
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::I,
+      Pauli::Y,
+      Pauli::Y
+    ],
+    coefficient=1
+  },
+  PauliTerm {
+    pauli=[
+      Pauli::I,
+      Pauli::I,
+      Pauli::Z,
+      Pauli::Z
+    ],
+    coefficient=1
+  }
+];
+
+qfunc N_block(q0: qbit, q1: qbit, layer: real) {
+  RZ(1.5708, q1);
+  CX(q1, q0);
+  RZ((2 * layer) - 1.5708, q0);
+  RY(1.5708 - (2 * layer), q1);
+  CX(q0, q1);
+  RY((2 * layer) - 1.5708, q1);
+  CX(q1, q0);
+  RZ(-1.5708, q0);
+}
+
+qfunc Sz_conserving_layer(q: qbit[], params: real[]) {
+  N_block(q[0], q[1], params[0]);
+  N_block(q[2], q[3], params[1]);
+  N_block(q[1], q[2], params[2]);
+  PHASE(params[3], q[0]);
+  PHASE(params[4], q[1]);
+  PHASE(params[5], q[2]);
+  PHASE(params[6], q[3]);
+}
+
+qfunc main(output q: qbit[], p: real[105]) {
+  allocate(4, q);
+  X(q[1]);
+  X(q[3]);
+  Sz_conserving_layer(q, p[0:7]);
+  Sz_conserving_layer(q, p[7:14]);
+  Sz_conserving_layer(q, p[14:21]);
+  Sz_conserving_layer(q, p[21:28]);
+  Sz_conserving_layer(q, p[28:35]);
+  Sz_conserving_layer(q, p[35:42]);
+  Sz_conserving_layer(q, p[42:49]);
+  Sz_conserving_layer(q, p[49:56]);
+  Sz_conserving_layer(q, p[56:63]);
+  Sz_conserving_layer(q, p[63:70]);
+  Sz_conserving_layer(q, p[70:77]);
+  Sz_conserving_layer(q, p[77:84]);
+  Sz_conserving_layer(q, p[84:91]);
+  Sz_conserving_layer(q, p[91:98]);
+  Sz_conserving_layer(q, p[98:105]);
+}
+
+cscope ```
+res = vqe(HAMILTONIAN, False, X0, optimizer=Optimizer.COBYLA, max_iteration=7000, tolerance=1e-10, step_size=0, skip_compute_variance=False, alpha_cvar=1)
+save({'result': res})
+```
