@@ -3,6 +3,8 @@ from classiq import * # Using Classiq Version 0.52.0 Release
 import numpy as np
 from typing import cast, List
 from classiq.execution import ExecutionPreferences
+import json
+import os
 
 # Initialization circuit layer
 @qfunc
@@ -84,12 +86,57 @@ def pauli_list_to_hamiltonian(pauli_list):
         for pauli, coeff in pauli_list
     ]
 
+# Write to a json
+def write_floats_to_json(float_list, filename):
+    with open(filename, 'w') as json_file:
+        json.dump(float_list, json_file)
+
+# Read from a json
+def read_floats_from_json(filename):
+    with open(filename, 'r') as json_file:
+        float_list = json.load(json_file)
+    return float_list
+
+def get_ordered_params(json_file_path):
+    # Read the JSON file
+    with open(json_file_path, 'r') as file:
+        data = json.load(file)
+    
+    # Create a list to store the ordered parameters
+    ordered_params = []
+    
+    # Iterate through the parameters (0 to 154 in this case)
+    for i in range(num_parameters):
+        param_key = f"p_param_{i}"
+        if param_key in data:
+            ordered_params.append(data[param_key])
+        else:
+            # If a parameter is missing, you can choose to append None or skip it
+            print("Parameter not found!")
+            ordered_params.append(None)
+    
+    return ordered_params
+
+def get_disordered_params(json_file_path):
+    # Read the JSON file
+    with open(json_file_path, 'r') as file:
+        data = json.load(file)
+    
+    # Create a list to store the ordered parameters
+    ordered_params = []
+    
+    # Iterate through the parameters (0 to 154 in this case)
+    for key,value in data.items():
+        ordered_params.append(value)
+    
+    return ordered_params
+
 # Circuit design variables
 n_bits = 16
 n_layers = 5
 J = 1
 JOB_NAME = "".join(("Sz_conserving | ","N_bits:",str(n_bits)," Layers:",str(n_layers)))
-
+JSON_FILE = "".join(("SZ_",str(n_bits),"_",str(n_layers),".json"))
 # Create the pauli list
 pauli_list = build_pauli_string(n_bits,J)
 # Create the Hamiltonian
@@ -103,8 +150,16 @@ num_parameters = param_per_layer*n_layers
 HAMILTONIAN = QConstant("HAMILTONIAN", List[PauliTerm], heis_ham)
 
 # Defining the initial parameter values
-X0 = list((np.random.rand(num_parameters) - .5) * np.pi)
-INITIAL_POINT = QConstant("INITIAL_POINT", List[float],X0)
+# X0 = list((np.random.rand(num_parameters) - .5) * np.pi)
+if os.path.exists(JSON_FILE):
+    print("JSON FOUND!")
+    X0 = get_disordered_params(JSON_FILE)
+    print(X0)
+else:
+    print("JSON NOT FOUND, USING RANDOM INIT PARAMS.")
+    X0 = list(np.random.rand(num_parameters) * 20 * np.pi)
+
+INITIAL_POINT = QConstant("INITIAL_POINT", List[float], X0)
 
 # Defining the Ansatz for the Problem
 @qfunc
@@ -134,7 +189,7 @@ def cmain() -> None:
     res = vqe(
         hamiltonian=HAMILTONIAN,
         maximize=False,
-        initial_point=INITIAL_POINT,
+        initial_point=[],
         optimizer=Optimizer.COBYLA, # Classical Optimizer
         max_iteration=10000,
         tolerance=1e-10,
@@ -161,3 +216,4 @@ vqe_result = estimation.result()[0].value
 print("Minimal energy of the Hamiltonian", vqe_result.energy)
 print("----------- FINISHED OPTIMIZATION -----------")
 # print("Optimal parameters for the Ansatz", vqe_result.optimal_parameters)
+write_floats_to_json(vqe_result.optimal_parameters, JSON_FILE)
