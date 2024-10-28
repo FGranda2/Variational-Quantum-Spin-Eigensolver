@@ -81,8 +81,8 @@ def pauli_list_to_hamiltonian(pauli_list):
     ]
 
 # Circuit design variables
-n_bits = 16
-n_layers = 5
+n_bits = 4
+n_layers = 15
 J = 1
 JOB_NAME = "".join(("Stot_conserving | ","N_bits:",str(n_bits)," Layers:",str(n_layers)))
 
@@ -123,8 +123,8 @@ def cmain() -> None:
         maximize=False,
         initial_point=INITIAL_POINT,
         optimizer=Optimizer.COBYLA, # Classical Optimizer
-        max_iteration=10000,
-        tolerance=1e-10,
+        max_iteration=5000,
+        tolerance=1e-06,
         step_size=0,
         skip_compute_variance=False,
         alpha_cvar=1,

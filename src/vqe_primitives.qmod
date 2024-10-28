@@ -4,18 +4,6 @@ HAMILTONIAN: PauliTerm[] = [
       Pauli::X,
       Pauli::X,
       Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
       Pauli::I
     ],
     coefficient=1
@@ -25,18 +13,6 @@ HAMILTONIAN: PauliTerm[] = [
       Pauli::Y,
       Pauli::Y,
       Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
       Pauli::I
     ],
     coefficient=1
@@ -45,18 +21,6 @@ HAMILTONIAN: PauliTerm[] = [
     pauli=[
       Pauli::Z,
       Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
       Pauli::I,
       Pauli::I
     ],
@@ -67,18 +31,6 @@ HAMILTONIAN: PauliTerm[] = [
       Pauli::I,
       Pauli::X,
       Pauli::X,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
       Pauli::I
     ],
     coefficient=1
@@ -88,18 +40,6 @@ HAMILTONIAN: PauliTerm[] = [
       Pauli::I,
       Pauli::Y,
       Pauli::Y,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
       Pauli::I
     ],
     coefficient=1
@@ -109,792 +49,12 @@ HAMILTONIAN: PauliTerm[] = [
       Pauli::I,
       Pauli::Z,
       Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
       Pauli::I
     ],
     coefficient=1
   },
   PauliTerm {
     pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::X,
-      Pauli::X,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Y,
-      Pauli::Y,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::Z,
-      Pauli::Z,
-      Pauli::I
-    ],
-    coefficient=1
-  },
-  PauliTerm {
-    pauli=[
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
       Pauli::I,
       Pauli::I,
       Pauli::X,
@@ -906,18 +66,6 @@ HAMILTONIAN: PauliTerm[] = [
     pauli=[
       Pauli::I,
       Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
       Pauli::Y,
       Pauli::Y
     ],
@@ -927,24 +75,71 @@ HAMILTONIAN: PauliTerm[] = [
     pauli=[
       Pauli::I,
       Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
-      Pauli::I,
       Pauli::Z,
       Pauli::Z
     ],
     coefficient=1
   }
 ];
+
+INITIAL_POINT: real[] = [
+  1.2977,
+  1.2281,
+  1.1464,
+  0.9772,
+  (-0.8275),
+  1.2256,
+  0.832,
+  (-1.4781),
+  (-0.3399),
+  1.0499,
+  0.8422,
+  0.7743,
+  (-0.3382),
+  1.4659,
+  (-0.9573),
+  1.5364,
+  (-1.1539),
+  (-0.3438),
+  (-1.5166),
+  0.475,
+  (-0.4578),
+  0.7836,
+  0.2746,
+  (-0.7119),
+  (-1.3792),
+  0.8478,
+  (-1.2363),
+  0.2242,
+  0.4273,
+  (-0.908),
+  (-0.7524),
+  (-0.9446),
+  (-0.5713),
+  (-0.6749),
+  (-1.3463),
+  (-0.8881),
+  0.4129,
+  (-0.2566),
+  1.1938,
+  0.9031,
+  (-0.5696),
+  (-0.5753),
+  0.0889,
+  (-0.9168),
+  (-0.5563)
+];
+
+qfunc Init(q: qbit[]) {
+  X(q[0]);
+  X(q[1]);
+  X(q[2]);
+  X(q[3]);
+  hadamard_transform(q[0]);
+  CX(q[0], q[1]);
+  hadamard_transform(q[2]);
+  CX(q[2], q[3]);
+}
 
 qfunc N_block(q0: qbit, q1: qbit, layer: real) {
   RZ(1.5708, q1);
@@ -957,58 +152,33 @@ qfunc N_block(q0: qbit, q1: qbit, layer: real) {
   RZ(-1.5708, q0);
 }
 
-qfunc Sz_conserving_layer(q: qbit[], params: real[]) {
+qfunc Stot_conserving_layer(q: qbit[], params: real[]) {
   N_block(q[0], q[1], params[0]);
   N_block(q[2], q[3], params[1]);
-  N_block(q[4], q[5], params[2]);
-  N_block(q[6], q[7], params[3]);
-  N_block(q[8], q[9], params[4]);
-  N_block(q[10], q[11], params[5]);
-  N_block(q[12], q[13], params[6]);
-  N_block(q[14], q[15], params[7]);
-  N_block(q[1], q[2], params[8]);
-  N_block(q[3], q[4], params[9]);
-  N_block(q[5], q[6], params[10]);
-  N_block(q[7], q[8], params[11]);
-  N_block(q[9], q[10], params[12]);
-  N_block(q[11], q[12], params[13]);
-  N_block(q[13], q[14], params[14]);
-  PHASE(params[15], q[0]);
-  PHASE(params[16], q[1]);
-  PHASE(params[17], q[2]);
-  PHASE(params[18], q[3]);
-  PHASE(params[19], q[4]);
-  PHASE(params[20], q[5]);
-  PHASE(params[21], q[6]);
-  PHASE(params[22], q[7]);
-  PHASE(params[23], q[8]);
-  PHASE(params[24], q[9]);
-  PHASE(params[25], q[10]);
-  PHASE(params[26], q[11]);
-  PHASE(params[27], q[12]);
-  PHASE(params[28], q[13]);
-  PHASE(params[29], q[14]);
-  PHASE(params[30], q[15]);
+  N_block(q[1], q[2], params[2]);
 }
 
-qfunc main(output q: qbit[], p: real[155]) {
-  allocate(16, q);
-  X(q[1]);
-  X(q[3]);
-  X(q[5]);
-  X(q[7]);
-  X(q[9]);
-  X(q[11]);
-  X(q[13]);
-  X(q[15]);
-  Sz_conserving_layer(q, p[0:31]);
-  Sz_conserving_layer(q, p[31:62]);
-  Sz_conserving_layer(q, p[62:93]);
-  Sz_conserving_layer(q, p[93:124]);
-  Sz_conserving_layer(q, p[124:155]);
+qfunc main(output q: qbit[], p: real[45]) {
+  allocate(4, q);
+  Init(q);
+  Stot_conserving_layer(q, p[0:3]);
+  Stot_conserving_layer(q, p[3:6]);
+  Stot_conserving_layer(q, p[6:9]);
+  Stot_conserving_layer(q, p[9:12]);
+  Stot_conserving_layer(q, p[12:15]);
+  Stot_conserving_layer(q, p[15:18]);
+  Stot_conserving_layer(q, p[18:21]);
+  Stot_conserving_layer(q, p[21:24]);
+  Stot_conserving_layer(q, p[24:27]);
+  Stot_conserving_layer(q, p[27:30]);
+  Stot_conserving_layer(q, p[30:33]);
+  Stot_conserving_layer(q, p[33:36]);
+  Stot_conserving_layer(q, p[36:39]);
+  Stot_conserving_layer(q, p[39:42]);
+  Stot_conserving_layer(q, p[42:45]);
 }
 
 cscope ```
-res = vqe(hamiltonian=HAMILTONIAN, maximize=False, initial_point=[], optimizer=Optimizer.COBYLA, max_iteration=10000, tolerance=1e-10, step_size=0.01, skip_compute_variance=False, alpha_cvar=1)
+res = vqe(hamiltonian=HAMILTONIAN, maximize=False, initial_point=INITIAL_POINT, optimizer=Optimizer.COBYLA, max_iteration=5000, tolerance=1e-06, step_size=0, skip_compute_variance=False, alpha_cvar=1)
 save({'result': res})
 ```

@@ -61,7 +61,7 @@ def pauli_list_to_hamiltonian(pauli_list):
     ]
 
 # Circuit design variables
-n_bits = 16
+n_bits = 4
 n_layers = 15
 J = 1
 JOB_NAME = "".join(("HW_efficient | ","N_bits:",str(n_bits)," Layers:",str(n_layers)))
@@ -79,7 +79,7 @@ num_parameters = param_per_layer*n_layers
 HAMILTONIAN = QConstant("HAMILTONIAN", List[PauliTerm], heis_ham)
 
 # Defining the initial parameter values
-X0 = list((np.random.rand(num_parameters) - .5) * np.pi)
+X0 = list(np.random.rand(num_parameters) * np.pi)
 INITIAL_POINT = QConstant("INITIAL_POINT", List[float],X0)
 
 # Defining the Ansatz for the Problem
@@ -111,8 +111,8 @@ def cmain() -> None:
         maximize=False,
         initial_point=INITIAL_POINT,
         optimizer=Optimizer.COBYLA, # Classical Optimizer
-        max_iteration=10000,
-        tolerance=1e-10,
+        max_iteration=5000,
+        tolerance=1e-06,
         step_size=0,
         skip_compute_variance=False,
         alpha_cvar=1,
@@ -126,7 +126,7 @@ qmod_prefs = set_execution_preferences(
     ExecutionPreferences(num_shots=10000, job_name=JOB_NAME),
 )
 qprog = synthesize(qmod_prefs)
-show(qprog)
+# show(qprog)
 write_qmod(qmod_prefs, name="vqe_primitives")
 
 # Execution

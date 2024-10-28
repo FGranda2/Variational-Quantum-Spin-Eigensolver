@@ -132,8 +132,8 @@ def get_disordered_params(json_file_path):
     return ordered_params
 
 # Circuit design variables
-n_bits = 16
-n_layers = 5
+n_bits = 4
+n_layers = 15
 J = 1
 JOB_NAME = "".join(("Sz_conserving | ","N_bits:",str(n_bits)," Layers:",str(n_layers)))
 JSON_FILE = "".join(("SZ_",str(n_bits),"_",str(n_layers),".json"))
@@ -167,11 +167,6 @@ INITIAL_POINT = QConstant("INITIAL_POINT", List[float], X0)
 def main(q: Output[QArray], p: CArray[CReal, num_parameters]) -> None:
     allocate(n_bits, q)
     # Prepare the initial state
-    # [0101....01]
-    # for i in range(n_bits):
-    #     if i % 2 != 0:
-    #         X(q[i])
-
     # [1010....10]
     for i in range(n_bits):
         if i % 2 != 0:
@@ -192,9 +187,9 @@ def cmain() -> None:
         maximize=False,
         initial_point=[],
         optimizer=Optimizer.COBYLA, # Classical Optimizer
-        max_iteration=10000,
-        tolerance=1e-10,
-        step_size=0.01,
+        max_iteration=5000,
+        tolerance=1e-06,
+        step_size=0,
         skip_compute_variance=False,
         alpha_cvar=1,
     )
