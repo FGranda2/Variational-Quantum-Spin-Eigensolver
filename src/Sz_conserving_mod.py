@@ -5,6 +5,7 @@ from typing import cast, List
 from classiq.execution import ExecutionPreferences
 import json
 import os
+import quimb as qu
 
 # Initialization circuit layer
 @qfunc
@@ -132,11 +133,11 @@ def get_disordered_params(json_file_path):
     return ordered_params
 
 # Circuit design variables
-n_bits = 16
+n_bits = 2
 n_layers = 5
 J = 1
-JOB_NAME = "".join(("Sz_conserving | ","N_bits:",str(n_bits)," Layers:",str(n_layers)))
-JSON_FILE = "".join(("SZ_",str(n_bits),"_",str(n_layers),".json"))
+JOB_NAME = "".join(("TEST_HAMILTONIAN Sz_conserving | ","N_bits:",str(n_bits)," Layers:",str(n_layers)))
+JSON_FILE = "".join(("TestSZ_",str(n_bits),"_",str(n_layers),".json"))
 
 # Create the pauli list
 pauli_list = build_pauli_string(n_bits,J)
@@ -147,74 +148,80 @@ heis_ham = pauli_list_to_hamiltonian(pauli_list)
 param_per_layer = (n_bits - 1)+n_bits # The N_Blocks + the Phase gates
 num_parameters = param_per_layer*n_layers
 
+# TEST HAMILTONIAN
+ham_matrix = qu.ham_heis(n_bits, J, cyclic=False)
+hamiltonian = matrix_to_hamiltonian(ham_matrix)
+my_mat = hamiltonian_to_matrix(heis_ham)
+ham_ising = qu.ham_isin
+print(my_mat)
 # Defining the Hamiltonian from the problem
-HAMILTONIAN = QConstant("HAMILTONIAN", List[PauliTerm], heis_ham)
+HAMILTONIAN = QConstant("HAMILTONIAN", List[PauliTerm], hamiltonian)
 
 # Defining the initial parameter values
 # X0 = list((np.random.rand(num_parameters) - .5) * np.pi)
-if os.path.exists(JSON_FILE):
-    print("JSON FOUND!")
-    X0 = get_disordered_params(JSON_FILE)
-    print(X0)
-else:
-    print("JSON NOT FOUND, USING RANDOM INIT PARAMS.")
-    X0 = list(np.random.rand(num_parameters) * 20 * np.pi)
+# if os.path.exists(JSON_FILE):
+#     print("JSON FOUND!")
+#     X0 = get_disordered_params(JSON_FILE)
+#     print(X0)
+# else:
+#     print("JSON NOT FOUND, USING RANDOM INIT PARAMS.")
+#     X0 = list(np.random.rand(num_parameters) * 20 * np.pi)
 
-INITIAL_POINT = QConstant("INITIAL_POINT", List[float], X0)
+# INITIAL_POINT = QConstant("INITIAL_POINT", List[float], X0)
 
-# Defining the Ansatz for the Problem
-@qfunc
-def main(q: Output[QArray], p: CArray[CReal, num_parameters]) -> None:
-    allocate(n_bits, q)
-    # Prepare the initial state
-    # [0101....01]
-    # for i in range(n_bits):
-    #     if i % 2 != 0:
-    #         X(q[i])
+# # Defining the Ansatz for the Problem
+# @qfunc
+# def main(q: Output[QArray], p: CArray[CReal, num_parameters]) -> None:
+#     allocate(n_bits, q)
+#     # Prepare the initial state
+#     # [0101....01]
+#     # for i in range(n_bits):
+#     #     if i % 2 != 0:
+#     #         X(q[i])
 
-    # [1010....10]
-    for i in range(n_bits):
-        if i % 2 != 0:
-            X(q[i])
+#     # [1010....10]
+#     for i in range(n_bits):
+#         if i % 2 != 0:
+#             X(q[i])
 
-    # Init(q)
-    # Do n layers of the Sz_conserving Ansatz
-    for i in range(n_layers):
-        start_index = i * param_per_layer
-        end_index = start_index + param_per_layer
-        Sz_conserving_layer(q, p[start_index:end_index])
+#     # Init(q)
+#     # Do n layers of the Sz_conserving Ansatz
+#     for i in range(n_layers):
+#         start_index = i * param_per_layer
+#         end_index = start_index + param_per_layer
+#         Sz_conserving_layer(q, p[start_index:end_index])
 
-# Defining the Variational Quantum Eigensolver p4rimitives with proper paramters
-@cfunc
-def cmain() -> None:
-    res = vqe(
-        hamiltonian=HAMILTONIAN,
-        maximize=False,
-        initial_point=[],
-        optimizer=Optimizer.COBYLA, # Classical Optimizer
-        max_iteration=10000,
-        tolerance=1e-10,
-        step_size=0.01,
-        skip_compute_variance=False,
-        alpha_cvar=1,
-    )
-    save({"result": res})
+# # Defining the Variational Quantum Eigensolver p4rimitives with proper paramters
+# @cfunc
+# def cmain() -> None:
+#     res = vqe(
+#         hamiltonian=HAMILTONIAN,
+#         maximize=False,
+#         initial_point=[],
+#         optimizer=Optimizer.COBYLA, # Classical Optimizer
+#         max_iteration=10000,
+#         tolerance=1e-10,
+#         step_size=0,
+#         skip_compute_variance=False,
+#         alpha_cvar=1,
+#     )
+#     save({"result": res})
 
-# Model, preferences and synthesize
-qmod = create_model(main, classical_execution_function=cmain)
-qmod_prefs = set_execution_preferences(
-    qmod,
-    ExecutionPreferences(num_shots=10000, job_name=JOB_NAME),
-)
-qprog = synthesize(qmod_prefs)
-write_qmod(qmod_prefs, name="vqe_primitives")
+# # Model, preferences and synthesize
+# qmod = create_model(main, classical_execution_function=cmain)
+# qmod_prefs = set_execution_preferences(
+#     qmod,
+#     ExecutionPreferences(num_shots=10000, job_name=JOB_NAME),
+# )
+# qprog = synthesize(qmod_prefs)
+# write_qmod(qmod_prefs, name="vqe_primitives")
 
-# Execution
-print("----------- STARTED OPTIMIZATION -----------")
-estimation = execute(qprog)
-vqe_result = estimation.result()[0].value
+# # Execution
+# print("----------- STARTED OPTIMIZATION -----------")
+# estimation = execute(qprog)
+# vqe_result = estimation.result()[0].value
 
-print("Minimal energy of the Hamiltonian", vqe_result.energy)
-print("----------- FINISHED OPTIMIZATION -----------")
-# print("Optimal parameters for the Ansatz", vqe_result.optimal_parameters)
-write_floats_to_json(vqe_result.optimal_parameters, JSON_FILE)
+# print("Minimal energy of the Hamiltonian", vqe_result.energy)
+# print("----------- FINISHED OPTIMIZATION -----------")
+# # print("Optimal parameters for the Ansatz", vqe_result.optimal_parameters)
+# write_floats_to_json(vqe_result.optimal_parameters, JSON_FILE)

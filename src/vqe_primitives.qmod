@@ -1009,6 +1009,6 @@ qfunc main(output q: qbit[], p: real[155]) {
 }
 
 cscope ```
-res = vqe(hamiltonian=HAMILTONIAN, maximize=False, initial_point=[], optimizer=Optimizer.COBYLA, max_iteration=10000, tolerance=1e-10, step_size=0, skip_compute_variance=False, alpha_cvar=1)
+res = vqe(hamiltonian=HAMILTONIAN, maximize=False, initial_point=[], optimizer=Optimizer.COBYLA, max_iteration=10000, tolerance=1e-10, step_size=0.01, skip_compute_variance=False, alpha_cvar=1)
 save({'result': res})
 ```
